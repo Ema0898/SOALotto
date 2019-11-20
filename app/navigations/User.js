@@ -17,6 +17,7 @@ import SalePointsScreen from "../screens/SalePoints";
 import AwardsHistoryScreen from "../screens/History/Awards";
 import GameHistoryScreen from "../screens/History/Games";
 import RechargesHistoryScreen from "../screens/History/Recharges";
+import GameScreen from "../screens/GameScreen";
 
 const homeScreenStack = createStackNavigator({
   Home: {
@@ -32,6 +33,15 @@ const saleScreenStack = createStackNavigator({
     screen: SalePointsScreen,
     navigationOptions: ({ navigation }) => ({
       title: "Puntos de venta"
+    })
+  }
+});
+
+const gameScreenStack = createStackNavigator({
+  Game: {
+    screen: GameScreen,
+    navigationOptions: ({ navigation }) => ({
+      title: "Juegos"
     })
   }
 });
@@ -114,6 +124,20 @@ const RootStack = createBottomTabNavigator(
         )
       })
     },
+    Game: {
+      screen: gameScreenStack,
+      navigationOptions: ({ navigation }) => ({
+        tabBarLabel: "Juegos",
+        tabBarIcon: ({ tintColor }) => (
+          <Icon
+            name="dice-5"
+            type="material-community"
+            size={22}
+            color={tintColor}
+          />
+        )
+      })
+    },
     Sale: {
       screen: saleScreenStack,
       navigationOptions: ({ navigation }) => ({
@@ -145,7 +169,7 @@ const RootStack = createBottomTabNavigator(
   },
   {
     initialRouteName: "Home",
-    order: ["Home", "Sale", "Record", "MyAccount"],
+    order: ["Home", "Sale", "Game", "Record", "MyAccount"],
     tabBarOptions: {
       inactiveTintColor: "#646464",
       activeTintColor: "#00a680"
