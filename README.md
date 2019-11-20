@@ -5,7 +5,7 @@ In this project a React Native application is built. This app is related to lott
 ## Installation
 You need to install NodeJS and NPM in your computer
 
-Run the following commands in /Front-end and /Back-end:
+Run the following commands in the root directory:
 To install the node dependencies
 ```sh
 npm install
