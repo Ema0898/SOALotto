@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Image, Text, FlatList } from "react-native";
 
+import * as firebase from "firebase";
+
 const list = [
   {
     name: "Lotería Vainicas",
@@ -50,6 +52,28 @@ const list = [
 ];
 
 export default class SalePoints extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      login: false
+    };
+  }
+
+  async componentDidMount() {
+    await firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({
+          login: true
+        });
+      } else {
+        this.setState({
+          login: false
+        });
+      }
+    });
+  }
+
   renderItem = ({ item }) => {
     return (
       <View style={styles.viewStyle1}>
@@ -67,16 +91,28 @@ export default class SalePoints extends Component {
   };
 
   render() {
-    return (
-      <View>
-        <FlatList
-          data={list}
-          renderItem={this.renderItem}
-          keyExtractor={(item, index) => index.toString()}
-          ItemSeparatorComponent={this.renderSeparator}
-        />
-      </View>
-    );
+    const { login } = this.state;
+
+    if (login) {
+      return (
+        <View>
+          <FlatList
+            data={list}
+            renderItem={this.renderItem}
+            keyExtractor={(item, index) => index.toString()}
+            ItemSeparatorComponent={this.renderSeparator}
+          />
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.viewBodyLogout}>
+          <Text style={{ fontWeight: "bold" }}>
+            Debes iniciar sesión para ver esta sección
+          </Text>
+        </View>
+      );
+    }
   }
 }
 
@@ -90,6 +126,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
+  },
+  viewBodyLogout: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#f2f2f2"
   },
   imageStyle: {
     width: 100,

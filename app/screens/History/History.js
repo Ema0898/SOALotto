@@ -1,31 +1,67 @@
 import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { Button } from "react-native-elements";
 
+import * as firebase from "firebase";
+
 export default class History extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      login: false
+    };
+  }
+
+  async componentDidMount() {
+    await firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({
+          login: true
+        });
+      } else {
+        this.setState({
+          login: false
+        });
+      }
+    });
+  }
+
   render() {
-    return (
-      <View style={styles.viewBody}>
-        <Button
-          title="Premios"
-          onPress={() => this.props.navigation.navigate("HistoryAwards")}
-          buttonStyle={styles.buttonStyle}
-          titleStyle={styles.btnTitle}
-        />
-        <Button
-          title="Juegos"
-          onPress={() => this.props.navigation.navigate("HistoryGames")}
-          buttonStyle={styles.buttonStyle}
-          titleStyle={styles.btnTitle}
-        />
-        <Button
-          title="Recargas"
-          onPress={() => this.props.navigation.navigate("HistoryRecharges")}
-          buttonStyle={styles.buttonStyle}
-          titleStyle={styles.btnTitle}
-        />
-      </View>
-    );
+    const { login } = this.state;
+
+    if (login) {
+      return (
+        <View style={styles.viewBody}>
+          <Button
+            title="Premios"
+            onPress={() => this.props.navigation.navigate("HistoryAwards")}
+            buttonStyle={styles.buttonStyle}
+            titleStyle={styles.btnTitle}
+          />
+          <Button
+            title="Juegos"
+            onPress={() => this.props.navigation.navigate("HistoryGames")}
+            buttonStyle={styles.buttonStyle}
+            titleStyle={styles.btnTitle}
+          />
+          <Button
+            title="Recargas"
+            onPress={() => this.props.navigation.navigate("HistoryRecharges")}
+            buttonStyle={styles.buttonStyle}
+            titleStyle={styles.btnTitle}
+          />
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.viewBodyLogout}>
+          <Text style={{ fontWeight: "bold" }}>
+            Debes iniciar sesión para ver esta sección
+          </Text>
+        </View>
+      );
+    }
   }
 }
 
@@ -33,6 +69,12 @@ const styles = StyleSheet.create({
   viewBody: {
     flex: 1,
     justifyContent: "center",
+    backgroundColor: "#f2f2f2"
+  },
+  viewBodyLogout: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "#f2f2f2"
   },
   buttonStyle: {
