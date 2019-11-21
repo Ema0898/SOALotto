@@ -23,7 +23,7 @@ const homeScreenStack = createStackNavigator({
   Home: {
     screen: HomeScreen,
     navigationOptions: ({ navigation }) => ({
-      title: "Menú Principal"
+      title: "Bienvenida"
     })
   }
 });
@@ -96,7 +96,7 @@ const RootStack = createBottomTabNavigator(
     Home: {
       screen: homeScreenStack,
       navigationOptions: ({ navigation }) => ({
-        tabBarLabel: "Principal",
+        tabBarLabel: "Bienvenida",
         tabBarIcon: ({ tintColor }) => (
           <Icon
             name="compass-outline"
