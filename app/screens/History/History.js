@@ -32,25 +32,27 @@ export default class History extends Component {
 
     if (login) {
       return (
-        <View style={styles.viewBody}>
-          <Button
-            title="Premios"
-            onPress={() => this.props.navigation.navigate("HistoryAwards")}
-            buttonStyle={styles.buttonStyle}
-            titleStyle={styles.btnTitle}
-          />
-          <Button
-            title="Juegos"
-            onPress={() => this.props.navigation.navigate("HistoryGames")}
-            buttonStyle={styles.buttonStyle}
-            titleStyle={styles.btnTitle}
-          />
-          <Button
-            title="Recargas"
-            onPress={() => this.props.navigation.navigate("HistoryRecharges")}
-            buttonStyle={styles.buttonStyle}
-            titleStyle={styles.btnTitle}
-          />
+        <View style={styles.viewBody2}>
+          <View style={styles.viewBody}>
+            <Button
+              title="Premios"
+              onPress={() => this.props.navigation.navigate("HistoryAwards")}
+              buttonStyle={styles.buttonStyle}
+              titleStyle={styles.btnTitle}
+            />
+            <Button
+              title="Juegos"
+              onPress={() => this.props.navigation.navigate("HistoryGames")}
+              buttonStyle={styles.buttonStyle}
+              titleStyle={styles.btnTitle}
+            />
+            <Button
+              title="Recargas"
+              onPress={() => this.props.navigation.navigate("HistoryRecharges")}
+              buttonStyle={styles.buttonStyle}
+              titleStyle={styles.btnTitle}
+            />
+          </View>
         </View>
       );
     } else {
@@ -67,6 +69,13 @@ export default class History extends Component {
 
 const styles = StyleSheet.create({
   viewBody: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "#f2f2f2",
+    marginLeft: 30,
+    marginRight: 30
+  },
+  viewBody2: {
     flex: 1,
     justifyContent: "center",
     backgroundColor: "#f2f2f2"

@@ -170,7 +170,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#e3e3e3",
     paddingTop: 10,
-    paddingBottom: 10
+    paddingBottom: 10,
+    marginLeft: 30,
+    marginRight: 30
   },
   btnLogoutTitle: {
     color: "#00a680"

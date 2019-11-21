@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Image, Text, FlatList } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  FlatList,
+  TouchableOpacity
+} from "react-native";
 
 import * as firebase from "firebase";
 
@@ -74,15 +81,24 @@ export default class SalePoints extends Component {
     });
   }
 
+  onPressItem = itemName => {
+    this.props.navigation.navigate("Game", {
+      saleName: itemName
+    });
+  };
+
   renderItem = ({ item }) => {
     return (
-      <View style={styles.viewStyle1}>
+      <TouchableOpacity
+        style={styles.viewStyle1}
+        onPress={() => this.onPressItem(item.name)}
+      >
         <Image style={styles.imageStyle} source={{ uri: item.avatar_url }} />
         <View style={styles.viewStyle2}>
           <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
           <Text>{item.subtitle}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 

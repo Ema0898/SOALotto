@@ -23,7 +23,7 @@ export default class Home extends Component {
           recargar tu cartera virtual y participar en muchos juegos
         </Text>
         <Text style={styles.description}>
-          En la sección de Juegos encontrarás divertos juegos en los que podrás
+          Tocando un punto de venta encontrarás los juegos en los que podrás
           participar para ganar dinero
         </Text>
         <Text style={styles.description}>
